@@ -1,4 +1,4 @@
-﻿### 1. Idea创建springboot项目，勾选web -> springboot web
+﻿﻿### 1. Idea创建springboot项目，勾选web -> springboot web
 ### 2. 导入kotlin依赖项以及插件配置
 
 ```
@@ -392,6 +392,7 @@ class Author{
 }
 ```
 ### 9. kotlin使用Ebean，这里不写services了，直接写一个controller
+- 注意：我们只写了Author类，推测是Ebean会帮我们打包出"Q实体类"，原本我是用maven打包过，后来再用了QAuthor这个类，没有出问题，但是当我用pom重新构建一个项目的时候发现QAuthor类找不到，几经尝试发现编写完实体类之后，需要先用maven compile一下才会在target下的domain包中生成出Q实体类
 ```
 import com.example.kotlin_and_ebean.domain.Author
 import io.ebean.EbeanServer
@@ -421,8 +422,10 @@ class EbeanController {
 
     @GetMapping("/testEbean")
     fun testEbean(): List<Author> {
-//        val author = QAuthor().nickName.equalTo("Lorin").findOne()
-//        val authors = QAuthor().nickName.equalTo("test").findList()
+        /*
+        * 注意： QAuthor并不是我们自己写的，如果要使用这个类的话，需要编译一下，
+        * 编写完实体类之后，maven compile一下，就会在target的domain包下出现query包，里面会有这个类
+        * */
         val authors = QAuthor().setMaxRows(2).findList() // 类型是BeanList
         authors.forEach{
             println(it.id)

@@ -30,8 +30,10 @@ class EbeanController {
 
     @GetMapping("/testEbean")
     fun testEbean(): List<Author> {
-//        val author = QAuthor().nickName.equalTo("Lorin").findOne()
-//        val authors = QAuthor().nickName.equalTo("test").findList()
+        /*
+        * 注意： QAuthor并不是我们自己写的，如果要使用这个类的话，需要编译一下，
+        * 编写完实体类之后，maven compile一下，就会在target的domain包下出现query包，里面会有这个类
+        * */
         val authors = QAuthor().setMaxRows(2).findList() // 类型是BeanList
         authors.forEach{
             println(it.id)
