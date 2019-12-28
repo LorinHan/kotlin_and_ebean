@@ -392,7 +392,11 @@ class Author{
 }
 ```
 ### 9. kotlin使用Ebean，这里不写services了，直接写一个controller
-- 注意：我们只写了Author类，推测是Ebean会帮我们打包出"Q实体类"，原本我是用maven打包过，后来再用了QAuthor这个类，没有出问题，但是当我用pom重新构建一个项目的时候发现QAuthor类找不到，几经尝试发现编写完实体类之后，需要先用maven compile一下才会在target下的domain包中生成出Q实体类
+- ebean的操作方式有多种: 
+- 1.可以直接通过通过实体类操作.save() .delete()等等方法;
+- 2.也可以通过ebean生成的"Q实体类"进行各种操作;
+- 3.也可以用工厂类EbeanServer来操作实体类或者使用原生sql
+- 注意：我们只写了Author类，推测是Ebean会帮我们打包出"Q实体类"，原本我是用maven打包过，后来再用了QAuthor这个类，没有出问题，但是当我用pom重新构建一个项目的时候发现QAuthor类找不到，几经尝试发现编写完实体类之后，需要先用maven compile一下才会在target下的domain包中生成出Q实体类，然后就可以直接操作Q实体类了。
 ```
 import com.example.kotlin_and_ebean.domain.Author
 import io.ebean.EbeanServer
