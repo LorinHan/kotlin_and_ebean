@@ -1,4 +1,4 @@
-﻿﻿### 1. Idea创建springboot项目，勾选web -> springboot web
+﻿### 1. Idea创建springboot项目，勾选web -> springboot web
 ### 2. 导入kotlin依赖项以及插件配置
 
 ```
